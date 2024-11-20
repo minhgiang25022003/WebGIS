@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <title>WebGIS - Sinh vật biển Cà Mau</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css" />
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+    <style>
+    /* Đặt style cho toàn bộ trang */
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+        background-color: #2b2b2b;
+    }
+
+    /* Header */
+    header {
+        background-color: #222;
+        color: #00FF00;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+    header a {
+        text-decoration: none;
+        color: white;
+        margin-left: 15px;
+    }
+    header a.active {
+        background-color: #00FF00;
+        color: black;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    /* Phần chính chứa bản đồ và sidebar */
+    #content {
+        display: flex;
+        flex: 1;
+    }
+    #sidebar {
+        width: 20%;
+        padding: 10px;
+        border-right: 1px solid #ccc;
+        height: calc(100vh - 120px);
+        overflow-y: auto;
+        background-color: #333;
+        color: white;
+    }
+    #map {
+        flex-grow: 1;
+        height: calc(100vh - 100px);
+        margin-left: 10px; /* Thêm khoảng cách bên trái để không đè lên thanh bên */
+    }
+
+    /* Popup trên bản đồ */
+    .ol-popup {
+        position: absolute;
+        background-color: white;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        bottom: 12px;
+        min-width: 200px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
+    footer {
+        background-color: #222;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 14px;
+    }
+    footer a {
+        color: #00FF00;
+        text-decoration: none;
+    }
+	category {
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        subcategory, .items {
+            display: none;
+            margin-left: 20px;
+        }
+        subcategory {
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+        item {
+            margin-left: 40px;
+        }
+		/* Biểu tượng mở rộng/thu gọn */
+        .toggle-icon {
+            margin-right: 10px;
+        }
+
+        .expanded::before {
+            content: "-"; /* Dấu trừ cho mở rộng */
+        }
+
+        .collapsed::before {
+            content: "+"; /* Dấu cộng cho thu gọn */
+        }
+		.item {
+            margin-left: 20px;
+        }
+</style>
+
+
+</head>
+
+<body onload="initialize_map();">
+
+<!-- Phần đầu trang -->
+<header>
+    <div>Sinh vật biển Cà Mau</div>
+    <nav>
+        <a href="webtest2.html">Trang chủ</a>
+        <a href="#" class="active">WebGIS</a>
+    </nav>
+</header>
+
+<!-- Phần nội dung chứa sidebar và bản đồ -->
+<div id="content">
+    <!-- Sidebar bên trái -->
+<div id="sidebar">
+    <h3>Loại đối tượng</h3>
+    
+    <!-- Bộ Cá nhám -->
+    <div class="category collapsed" onclick="toggleDisplay('bo1', this)">Bộ Cá mập</div>
+    <div id="bo1" class="items">
+        
+        <!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho1', this)">Họ Cá nhám mèo</div>
+        <div id="ho1" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá nhám chấm </label><br>
+            
+        </div>
+    </div>
+    
+    <!-- Bộ -->
+    <div class="category collapsed" onclick="toggleDisplay('bo2', this)">Bộ Cá đuối quạt</div>
+    <div id="bo2" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho2', this)">Họ Cá đuối bồng</div>
+        <div id="ho2" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá đuối bồng hoa trắng </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá đuối ngói </label><br>
+            
+        </div>
+    </div>
+	<!-- Bộ -->
+	<div class="category collapsed" onclick="toggleDisplay('bo3', this)">Bộ Cá cháo biển</div>
+    <div id="bo3" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho3', this)">Họ cá cháo lớn</div>
+        <div id="ho3" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá cháo lớn </label><br>
+            
+        </div>
+    </div>
+	<!-- Bộ -->
+	<div class="category collapsed" onclick="toggleDisplay('bo4', this)">Bộ Cá chình</div>
+    <div id="bo4" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho4', this)">Họ cá dưa</div>
+        <div id="ho4" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá lạc </label><br>
+            
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho4a', this)">Họ cá chình rắn</div>
+		<div id="ho4a" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá nhệch </label><br>    
+        </div>	
+    </div>
+	
+	<div class="category collapsed" onclick="toggleDisplay('bo5', this)">Bộ Cá trích</div>
+    <div id="bo5" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho5', this)">Họ cá trích</div>
+        <div id="ho5" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá mòi không răng </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá mòi thái lan </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá mai </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá bẹ </label><br>   
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho5a', this)">Họ cá trỏng</div>
+		<div id="ho5a" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá lành canh </label><br>
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI1" onchange="updateMarkers()"> Cá lẹp vàng </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá lẹp trắng </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá cơm thường </label><br>
+        </div>
+		
+    </div>
+	
+	<div class="category collapsed" onclick="toggleDisplay('bo6', this)">Bộ Cá nheo</div>
+    <div id="bo6" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho6', this)">Họ cá úc</div>
+        <div id="ho6" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá úc thép </label><br>	   
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho6a', this)">Họ cá ngát</div>
+		<div id="ho6a" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá ngát chó </label><br>
+        </div>		
+    </div>
+	
+	<div class="category collapsed" onclick="toggleDisplay('bo7', this)">Bộ Cá mối</div>
+    <div id="bo7" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho7', this)">Họ cá mối</div>
+        <div id="ho7" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá khoai </label><br>	   
+        </div>		
+    </div>
+	
+	<div class="category collapsed" onclick="toggleDisplay('bo8', this)">Bộ Cá tuyết</div>
+    <div id="bo8" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho8', this)">Họ cá tuyết tê giác</div>
+        <div id="ho8" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá tuyết tê giác </label><br>	   
+        </div>		
+    </div>
+	
+	<div class="category collapsed" onclick="toggleDisplay('bo9', this)">Bộ Cá cóc</div>
+    <div id="bo9" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho9', this)">Họ cá cóc</div>
+        <div id="ho9" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá mao </label><br>	   
+        </div>		
+    </div>
+	
+	<div class="category collapsed" onclick="toggleDisplay('bo10', this)">Bộ Cá suốt</div>
+    <div id="bo10" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho10', this)">Họ cá suốt</div>
+        <div id="ho10" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá suốt </label><br>	   
+        </div>		
+    </div>
+	
+	<div class="category collapsed" onclick="toggleDisplay('bo11', this)">Bộ Cá nhói</div>
+    <div id="bo11" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho11', this)">Họ cá nhói</div>
+        <div id="ho11" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá nhói đuôi chấm </label><br>	   
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho11a', this)">Họ cá Kìm</div>
+        <div id="ho11a" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá kìm trung hoa </label><br>	   
+        </div>
+    </div>
+	
+	<div class="category collapsed" onclick="toggleDisplay('bo12', this)">Bộ Cá chìa vôi</div>
+    <div id="bo12" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho12', this)">Họ cá chìa vôi</div>
+        <div id="ho12" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá ngựa đen </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá chìa vôi </label><br>
+        </div>		
+    </div>
+	
+	<div class="category collapsed" onclick="toggleDisplay('bo13', this)">Bộ Cá mù làn</div>
+    <div id="bo13" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho13', this)">Họ cá mao quỷ</div>
+        <div id="ho13" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá mao tiên vằn đuôi </label><br>			
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho13a', this)">Họ cá chai</div>
+        <div id="ho13a" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMI2" onchange="updateMarkers()"> Cá chai thường </label><br>			
+        </div>
+    </div>
+	
+	<div class="category collapsed" onclick="toggleDisplay('bo14', this)">Bộ Cá vược</div>
+    <div id="bo14" class="items">
+		<!-- Checkbox con -->
+        <div class="subcategory collapsed" onclick="toggleDisplay('ho14', this)">Họ cá chẽm</div>
+        <div id="ho14" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá chẽm </label><br>			
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho14a', this)">Họ cá sơn biển</div>
+        <div id="ho14a" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá sơn đầu trần </label><br>			
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho14b', this)">Họ cá ông căng</div>
+        <div id="ho14b" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá căng cát </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá căng vẩy to </label><br>
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho14c', this)">Họ cá sơn</div>
+        <div id="ho14c" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá sơn sọc </label><br>			
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho14d', this)">Họ cá đục</div>
+        <div id="ho14d" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá đục bạc </label><br>			
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho14e', this)">Họ cá liệt</div>
+        <div id="ho14e" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá liệt mõm ngắn </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá liệt vằn lưng </label><br>
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho14f', this)">Họ cá hồng</div>
+        <div id="ho14f" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá hồng </label><br>
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho14g', this)">Họ cá móm</div>
+        <div id="ho14g" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá móm bạc </label><br>
+        </div>
+		<div class="subcategory collapsed" onclick="toggleDisplay('ho14h', this)">Họ cá đù</div>
+        <div id="ho14h" class="items">
+            <label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá đù mõm đen </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá đù mõm nhọn </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMII1" onchange="updateMarkers()"> Cá kẽ rút xen </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMII2" onchange="updateMarkers()"> Cá uốp râu </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMII2" onchange="updateMarkers()"> Cá uốp bê lăng </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMII2" onchange="updateMarkers()"> Cá uốp lưng cao </label><br>
+			<label class="item"><input type="checkbox" class="fish-item" data-type="CMII2" onchange="updateMarkers()"> Cá nạng hồng </label><br>
+        </div>
+    </div>
+	
+	
+	
+	
+	
+	
+</div>
+
+	<!-- JavaScript -->
+    <script>
+        function toggleDisplay(id, element) {
+            const content = document.getElementById(id);
+            if (content) {
+                // Toggle hiển thị
+                content.style.display = (content.style.display === "none" || content.style.display === "") ? "block" : "none";
+                
+                // Thay đổi biểu tượng
+                if (element.classList.contains('collapsed')) {
+                    element.classList.remove('collapsed');
+                    element.classList.add('expanded');
+                } else {
+                    element.classList.remove('expanded');
+                    element.classList.add('collapsed');
+                }
+            }
+        }
+    </script>
+
+
+    <!-- Khu vực bản đồ nằm bên phải -->
+    <div id="map"></div>
+	<!-- Popup -->
+    <div id="popup" class="ol-popup"></div>
+</div>
+
+<!-- Phần chân trang -->
+<footer>
+    © Sinh vật biển Cà Mau 2024 <br>
+    Mọi yêu cầu, góp ý có thể liên hệ thông qua <a href="contact.html">form liên hệ của chúng tôi</a>.
+</footer>
+
+<script>
+    var format = 'image/png';
+    var map, vectorSource, overlay;
+    var markers = {
+        CMI2: [],
+        CMI1: [],
+        CMII1: [],
+		CMII2: [],
+		CMIII1: [],
+		CMIII2: [],
+    };
+
+    // Cập nhật dữ liệu để bao gồm hình ảnh
+    const data = [
+	    { 
+            name: "Tọa độ ghi nhận CM-I-1: ", 
+            lat: 8.66306, 
+            lng: 104.7025, 
+            type: "CMI1", 
+            info: "8.66306;  104.7025", 
+            img: "img/canhamcham.jpg"
+        },
+        { 
+            name: "Tọa độ ghi nhận CM-I-2:", 
+            lat: 8.69858, 
+            lng: 104.68087, 
+            type: "CMI2", 
+            info: "8.69858; 104.68087", 
+            img: "#"
+        },
+        { 
+            name: "Tọa độ ghi nhận CM-II-1:", 
+            lat: 8.71139, 
+            lng: 104.76444, 
+            type: "CMII1", 
+            info: "8.71139; 104.76444", 
+            img: "https://example.com/salt1.jpg"
+        },
+		{ 
+            name: "Tọa độ ghi nhận CM-II-2:", 
+            lat: 8.74274, 
+            lng: 104.72809, 
+            type: "CMII2", 
+            info: "8.74274; 104.72809", 
+            img: "https://example.com/mangrove2.jpg"
+        },
+		{ 
+            name: "Tọa độ ghi nhận CM-III-1: ", 
+            lat: 8.73997, 
+            lng: 104.83003, 
+            type: "CMIII1", 
+            info: "8.73997; 104.83003", 
+            img: "#"
+        },
+		{ 
+            name: "Tọa độ ghi nhận CM-III-2: ", 
+            lat: 8.7625, 
+            lng: 104.83226, 
+            type: "CMIII1", 
+            info: "8.7625; 104.83226", 
+            img: "#"
+        },
+		
+    ];
+
+    function initialize_map() {
+        var layerBG = new ol.layer.Tile({ source: new ol.source.OSM() });
+
+        // Lớp WMS từ GeoServer
+        var layerhuyen = new ol.layer.Image({
+            source: new ol.source.ImageWMS({
+                ratio: 1,
+                url: 'http://localhost:8080/geoserver/Web1/wms?service=WMS&version=1.1.0&request=GetMap&layers=Web1%3Ahuyen&bbox=104.69068908691406%2C8.412519454956055%2C105.41751861572266%2C9.562411308288574&width=485&height=768&srs=EPSG%3A4326&styles=&format=application/openlayers',
+                params: {
+                    'FORMAT': 'image/png',
+                    'VERSION': '1.1.0',
+                    STYLES: '',
+                    LAYERS: 'Web1:huyen'
+                }
+            })
+        });
+
+        vectorSource = new ol.source.Vector();
+
+        data.forEach(item => {
+            var marker = createMarker(item.lat, item.lng, item.name, item.info, item.img);
+            vectorSource.addFeature(marker);
+            markers[item.type].push(marker);
+        });
+
+        var vectorLayer = new ol.layer.Vector({ source: vectorSource });
+
+        var viewMap = new ol.View({
+            center: ol.proj.fromLonLat([105.1524, 9.1883]),
+            zoom: 9.4
+        });
+
+        map = new ol.Map({
+            target: 'map',
+            layers: [layerBG, layerhuyen, vectorLayer],
+            view: viewMap
+        });
+
+        // Tạo overlay cho popup
+        overlay = new ol.Overlay({
+            element: document.getElementById('popup'),
+            autoPan: true,
+            autoPanAnimation: { duration: 250 }
+        });
+        map.addOverlay(overlay);
+
+        map.on('click', function (evt) {
+            var feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+                return feature;
+            });
+
+            if (feature) {
+                var coordinates = feature.getGeometry().getCoordinates();
+                var name = feature.get('name');
+                var info = feature.get('info');
+                var img = feature.get('img');
+                showPopup(coordinates, name, info, img);
+            } else {
+                overlay.setPosition(undefined);
+            }
+        });
+    }
+
+    function createMarker(lat, lng, name, info, img) {
+        var feature = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.fromLonLat([lng, lat])),
+            name: name,
+            info: info,
+            
+        });
+
+        var style = new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 6,
+                fill: new ol.style.Fill({ color: 'blue' }),
+                stroke: new ol.style.Stroke({ color: 'white', width: 2 })
+            })
+        });
+
+        feature.setStyle(style);
+        return feature;
+    }
+
+    // Hàm hiển thị popup với hình ảnh
+    function showPopup(coordinates, name, info) {
+        var popupElement = document.getElementById('popup');
+        popupElement.innerHTML = `
+            <b>${name}</b><br>${info}<br>
+            
+        `;
+        overlay.setPosition(coordinates);
+    }
+
+    function updateMarkers() {
+    // Lấy tất cả các checkbox có data-type
+    const checkboxes = document.querySelectorAll('input[data-type]');
+    
+    // Duyệt qua tất cả các marker và cập nhật trạng thái dựa trên checkbox
+    Object.keys(markers).forEach(type => {
+        // Kiểm tra nếu có bất kỳ checkbox nào của loại đó được chọn
+        const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked && checkbox.getAttribute('data-type') === type);
+        
+        // Hiển thị hoặc ẩn các marker dựa trên trạng thái checkbox
+        markers[type].forEach(marker => {
+            marker.setStyle(isChecked ? getMarkerStyle(type) : null);
+        });
+    });
+}
+
+
+    function getMarkerStyle(type) {
+        const colors = {
+            CMI2: 'green',
+            CMI1: 'red',
+            CMII1: 'orange',
+			CMII2: 'gray',
+			CMIII1: 'yellow',
+			CMIII2: 'purple',
+        };
+
+        return new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 6,
+                fill: new ol.style.Fill({ color: colors[type] }),
+                stroke: new ol.style.Stroke({ color: 'white', width: 2 })
+            })
+        });
+    }
+</script>
+</body>
+</html>

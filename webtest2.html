@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinh vật biển Cà Mau</title>
+   	<style>	
+        /* CSS cho thanh tìm kiếm */
+        .search-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .search-input {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+		* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1c1c1c;
+    color: #ffffff;
+}
+
+header {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #66ff66;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    margin-left: 20px;
+    padding: 5px 10px;
+}
+
+nav a.active {
+    background-color: #66ff66;
+    color: #1c1c1c;
+    border-radius: 4px;
+}
+
+.intro {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.intro h2 {
+    color: #66ff66;
+    margin-bottom: 20px;
+}
+
+.gallery {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.gallery-item {
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    max-width: 400px; /* Tăng kích thước chiều rộng */
+    flex: 1 1 calc(33.33% - 20px); /* Điều chỉnh khoảng cách giữa các ô */
+    margin-bottom: 20px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto; /* Để hình ảnh không bị cắt, giữ nguyên tỷ lệ */
+    object-fit: contain; /* Hiển thị toàn bộ hình ảnh */
+}
+
+
+.caption {
+    padding: 10px;
+}
+
+.caption em {
+    display: block;
+    font-size: 18px;
+    color: #66ff66;
+}
+
+.caption p {
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.footer {
+    background-color: #1c1c1c;
+    padding: 20px;
+    text-align: center;
+    color: #cccccc;
+    border-top: 1px solid #333;
+}
+
+.footer p {
+    margin: 10px 0;
+}
+
+.footer a {
+    color: #66ff66;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    <!-- Thanh công cụ -->
+    <header>
+        <h1>Sinh vật biển Cà Mau</h1>
+        <nav>
+            <a href="#" class="active">Trang chủ</a>
+            <a href="check7.html">WebGIS</a>
+        </nav>
+    </header>
+
+    <!-- Phần tiêu đề -->
+    <section class="intro">
+        <h2>CƠ SỞ DỮ LIỆU CÁC LOÀI SINH VẬT BIỂN TẠI CÀ MAU</h2>
+        <p>Khám phá các loài sinh vật biển đa dạng ở Cà Mau thông qua bộ sưu tập hình ảnh sống động và vị trí phân bổ chủ yếu tại vùng biển Cà Mau.</p>
+    </section>
+	<!-- Thanh công cụ tìm kiếm -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm loài cá..." onkeyup="searchFish()">
+    </div>
+
+    <!-- Phần hiển thị hình ảnh với mô tả -->
+    <section class="gallery">
+        <div class="gallery-container">
+            <!-- Mẫu ô hình ảnh với mô tả tên loài -->
+            <div class="gallery-item">
+			<a href="if/inforcanhamcham.html" target="_blank">
+                <img src="img/canhamcham.jpg" alt="Sinh vật biển 1">
+                <div class="caption">
+                    <em>Cá nhám chấm</em>
+                    <p>Atelomycterus macleayi </p>
+                </div>
+			</a>
+            </div>
+            <div class="gallery-item">
+			<a href="if/f2.html" target="_blank">
+                <img src="img/caduoibonghoatrang.jpg" alt="Sinh vật biển 2">
+                <div class="caption">
+                    <em>Cá đuối bồng hoa trắng</em>
+                    <p>Himantura gerrardi </p>
+                </div>
+			</a>	
+            </div>
+            <div class="gallery-item">
+			<a href="if/f3.html" target="_blank">
+                <img src="img/caduoingoi.jpg" alt="Sinh vật biển 3">
+                <div class="caption">
+                    <em>Cá đuối ngói</em>
+                    <p>Himantura imbricata </p>
+                </div>
+			</a>	
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f4.html" target="_blank">
+                <img src="img/cachaolon.jpg" alt="Sinh vật biển 4">
+                <div class="caption">
+                    <em>Cá cháo lớn</em>
+                    <p>Megalops cyprinoides </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f5.html" target="_blank">
+                <img src="img/calac.jpg" alt="Sinh vật biển 5">
+                <div class="caption">
+                    <em>Cá lạc</em>
+                    <p>Congresox talabonoides </p>
+                </div>
+			</a>
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f6.html" target="_blank">
+                <img src="img/canhech.jpg" alt="Sinh vật biển 6">
+                <div class="caption">
+                    <em>Cá nhệch</em>
+                    <p>Pisodonophis cancrivorus </p>
+                </div>
+			</a>
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f7.html" target="_blank">
+                <img src="img/camoikhongrang.jpg" alt="Sinh vật biển 7">
+                <div class="caption">
+                    <em>Cá mòi không răng</em>
+                    <p>Anodontostoma chacunda </p>
+                </div>
+			</a>
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f8.html" target="_blank">
+                 <img src="img/camoithailan.jpg" alt="Sinh vật biển 8">
+                <div class="caption">
+                    <em>Cá mòi thái lan</em>
+                    <p>Anodontostoma thailandiae </p>
+                </div>
+			</a>
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f9.html" target="_blank">
+                <img src="img/camai.jpg" alt="Sinh vật biển 9">
+                <div class="caption">
+                    <em>Cá mai</em>
+                    <p>Escualosa thoracata </p>
+                </div>
+			</a>	
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f10.html" target="_blank">
+                <img src="img/cabe.jpg" alt="Sinh vật biển 10">
+                <div class="caption">
+                    <em>Cá bẹ</em>
+                    <p>Ilisha melastoma </p>
+                </div>
+			</a>
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f11.html" target="_blank">
+                <img src="img/calanhcanh.jpg" alt="Sinh vật biển 11">
+                <div class="caption">
+                    <em>Cá lành canh</em>
+                    <p>Coilia rebentischii  </p>
+                </div>
+			</a>
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f12.html" target="_blank">
+                <img src="img/caleptrang.jpg" alt="Sinh vật biển 12">
+                <div class="caption">
+                    <em>Cá lẹp trắng </em>
+                    <p>Setipinna phasa </p>
+                </div>
+			</a>	
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f13.html" target="_blank">
+                <img src="img/calepvang.jpg" alt="Sinh vật biển 13">
+                <div class="caption">
+                    <em>Cá lẹp vàng </em>
+                    <p>Setipinna breviceps </p>
+                </div>
+			</a>	
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f14.html" target="_blank">
+                <img src="img/cacomthuong.jpg" alt="Sinh vật biển 14">
+                <div class="caption">
+                    <em>Cá cơm thường </em>
+                    <p>Stolephorus commersonii</p>
+                </div>
+			</a>
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f15.html" target="_blank">
+                <img src="img/caucthep.jpg" alt="Sinh vật biển 15">
+                <div class="caption">
+                    <em>Cá úc thép </em>
+                    <p>Osteogeneiosus militaris  </p>
+                </div>
+			</a>
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f16.html" target="_blank">
+                <img src="img/cangatcho.jpg" alt="Sinh vật biển 16">
+                <div class="caption">
+                    <em>Cá ngát chó </em>
+                    <p>Plotosus canius   </p>
+                </div>
+			</a>
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f17.html" target="_blank">
+                <img src="img/cakhoai.jpg" alt="Sinh vật biển 17">
+                <div class="caption">
+                    <em>Cá khoai </em>
+                    <p>Harpadon nehereus </p>
+                </div>
+			</a>
+            </div>			
+			<div class="gallery-item">
+			<a href="if/f18.html" target="_blank">
+                <img src="img/catuyettegiac.jpg" alt="Sinh vật biển 18">
+                <div class="caption">
+                    <em>Cá tuyết tê giác </em>
+                    <p>Bregmaceros mcclellandi   </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f19.html" target="_blank">
+                <img src="img/camao.jpg" alt="Sinh vật biển 19">
+                <div class="caption">
+                    <em>Cá mao </em>
+                    <p>Batrachomoeus trispinosus   </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f20.html" target="_blank">
+                <img src="img/casuot.jpg" alt="Sinh vật biển 20">
+                <div class="caption">
+                    <em>Cá suốt </em>
+                    <p>Hypoatherina temminckii </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f21.html" target="_blank">
+                <img src="img/canhoiduoicham.jpg" alt="Sinh vật biển 21">
+                <div class="caption">
+                    <em>Cá nhói đuôi chấm </em>
+                    <p>Strongylura strongylura  </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f22.html" target="_blank">
+                <img src="img/cakimtrunghoa.jpg" alt="Sinh vật biển 22">
+                <div class="caption">
+                    <em>Cá kìm trung hoa </em>
+                    <p>Hyporhamphus sindensis   </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f23.html" target="_blank">
+                <img src="img/canguaden.jpg" alt="Sinh vật biển 23">
+                <div class="caption">
+                    <em>Cá ngựa đen </em>
+                    <p>Hippocampus kuda</p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f24.html" target="_blank">
+                <img src="img/chiavoi.jpg" alt="Sinh vật biển 24">
+                <div class="caption">
+                    <em>Cá chìa vôi </em>
+                    <p>Ichthyocampus carce  </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f25.html" target="_blank">
+                <img src="img/camaotienvanduoi.jpg" alt="Sinh vật biển 25">
+                <div class="caption">
+                    <em>Cá mao tiên vằn đuôi </em>
+                    <p>Minous monodactylus   </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f26.html" target="_blank">
+                <img src="img/cachaithuong.jpg" alt="Sinh vật biển 26">
+                <div class="caption">
+                    <em>Cá chai thường </em>
+                    <p>Platycephalus arenarius</p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f27.html" target="_blank">
+                <img src="img/cachem.jpg" alt="Sinh vật biển 27">
+                <div class="caption">
+                    <em>Cá chẽm </em>
+                    <p>Lates calcarifer</p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f28.html" target="_blank">
+                <img src="img/casondautran.jpg" alt="Sinh vật biển 28">
+                <div class="caption">
+                    <em>Cá sơn đầu trần </em>
+                    <p>Ambassis gymnocephalus </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f29.html" target="_blank">
+                <img src="img/cacangcat.jpg" alt="Sinh vật biển 29">
+                <div class="caption">
+                    <em>Cá căng cát </em>
+                    <p>Terapon jarbua </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f30.html" target="_blank">
+                <img src="img/cacangvayto.jpg" alt="Sinh vật biển 30">
+                <div class="caption">
+                    <em>Cá căng vẩy to </em>
+                    <p>Terapon theraps </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f31.html" target="_blank">
+                <img src="img/casonsoc.jpg" alt="Sinh vật biển 31">
+                <div class="caption">
+                    <em>Cá sơn sọc </em>
+                    <p>Apogon fasciatus  </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f32.html" target="_blank">
+                <img src="img/caducbac.jpg" alt="Sinh vật biển 32">
+                <div class="caption">
+                    <em>Cá đục bạc </em>
+                    <p>Sillago sihama   </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f33.html" target="_blank">
+                <img src="img/calietmomngan.jpg" alt="Sinh vật biển 33">
+                <div class="caption">
+                    <em>Cá liệt mõm ngắn </em>
+                    <p>Leiognathus brevirostris</p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f34.html" target="_blank">
+                <img src="img/calietvanlung.jpg" alt="Sinh vật biển 34">
+                <div class="caption">
+                    <em>Cá liệt vằn lưng </em>
+                    <p>Secutor ruconius </p>
+                </div>
+			</a>
+            </div>
+            <div class="gallery-item">
+			<a href="if/f35.html" target="_blank">
+                <img src="img/cahong.jpg" alt="Sinh vật biển 35">
+                <div class="caption">
+                    <em>Cá hồng </em>
+                    <p>Lutjanus sp. </p>
+                </div>
+			</a>
+            </div>
+            <div class="gallery-item">
+			<a href="if/f36.html" target="_blank">
+                <img src="img/camombac.jpg" alt="Sinh vật biển 36">
+                <div class="caption">
+                    <em>Cá móm bạc </em>
+                    <p>Gerres lucidus</p>
+                </div>
+			</a>
+            </div>
+            <div class="gallery-item">
+			<a href="if/f37.html" target="_blank">
+                <img src="img/cadumomden.jpg" alt="Sinh vật biển 37">
+                <div class="caption">
+                    <em>Cá đù mõm đen </em>
+                    <p>Atrobucca nibe </p>
+                </div>
+			</a>
+            </div>
+            <div class="gallery-item">
+			<a href="if/f38.html" target="_blank">
+                <img src="img/cadumomnhon.jpg" alt="Sinh vật biển 38">
+                <div class="caption">
+                    <em>Cá đù mõm nhọn </em>
+                    <p>Chrysochir aureus </p>
+                </div>
+			</a>
+            </div>
+            <div class="gallery-item">
+			<a href="if/f39.html" target="_blank">
+                <img src="img/cakerutxen.jpg" alt="Sinh vật biển 39">
+                <div class="caption">
+                    <em>Cá kẽ rút xen </em>
+                    <p>Dendrophysa russelii </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f40.html" target="_blank">
+                <img src="img/cauoprau.jpg" alt="Sinh vật biển 40">
+                <div class="caption">
+                    <em>Cá uốp râu </em>
+                    <p>Johnius amblycephalus  </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f41.html" target="_blank">
+                <img src="img/cauopbelang.jpg" alt="Sinh vật biển 41">
+                <div class="caption">
+                    <em>Cá uốp bê lăng </em>
+                    <p>Johnius belangerii </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f42.html" target="_blank">
+                <img src="img/cauoplungcao.jpg" alt="Sinh vật biển 42">
+                <div class="caption">
+                    <em>Cá uốp lưng cao </em>
+                    <p>Johnius dussumieri  </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f43.html" target="_blank">
+                <img src="img/cananghong.jpg" alt="Sinh vật biển 43">
+                <div class="caption">
+                    <em>Cá nạng hồng </em>
+                    <p>Otolithes ruber </p>
+                </div>
+			</a>
+            </div>
+        </div>
+    </section>
+<!-- Phần footer -->
+<footer class="footer">
+    <p>© Sinh vật biển Cà Mau 2024</p>
+    <p>         
+        Mọi yêu cầu, góp ý có thể liên hệ thông qua <a href="contact.html">form liên hệ của chúng tôi</a>.
+    </p>
+</footer>
+    <script>
+        function searchFish() {
+            // Lấy từ khóa tìm kiếm
+            const filter = document.getElementById("searchInput").value.toLowerCase();
+            // Lấy tất cả các mục trong thư viện hình ảnh
+            const items = document.querySelectorAll(".gallery-item");
+
+            // Duyệt qua tất cả các mục và hiển thị hoặc ẩn dựa trên từ khóa tìm kiếm
+            items.forEach(item => {
+                // Lấy tên loài cá từ caption
+                const name = item.querySelector(".caption em").textContent.toLowerCase();
+                // Kiểm tra xem từ khóa có nằm trong tên loài cá không
+                if (name.includes(filter)) {
+                    item.style.display = ""; // Hiển thị nếu khớp
+                } else {
+                    item.style.display = "none"; // Ẩn nếu không khớp
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

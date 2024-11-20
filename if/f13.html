@@ -1,0 +1,151 @@
+
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin sinh vật biển - Cà Mau</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #222;
+            color: #b5ffb5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+        .header h1 {
+            color: #b5ffb5;
+            font-size: 24px;
+            margin: 0;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .nav-button {
+            background-color: #33cc33;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .nav-button:hover {
+            background-color: #28a428;
+        }
+        .container {
+            display: flex;
+            background-color: #222;
+            color: #fff;
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .image-section {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+        .image-section img {
+            max-width: 100%;
+            height: 300px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .info-section {
+            flex: 1;
+            padding: 20px;
+        }
+        #map {
+            height: 300px;
+            width: 100%;
+            border-radius: 8px;
+        }
+        .description {
+            margin-top: 20px;
+        }
+        .footer {
+            background-color: #333;
+            padding: 10px 20px;
+            text-align: center;
+            color: #b5ffb5;
+            font-size: 14px;
+            margin-top: auto;
+        }
+        .footer a {
+            color: #b5ffb5;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Sinh vật biển Cà Mau</h1>
+    <div class="nav-buttons">
+        <a href="webtest2.html" class="nav-button">Trang chủ</a>
+        <a href="check7.html" class="nav-button">WebGIS</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="image-section">
+        <h2>Cá lẹp vàng <br>(Setipinna breviceps )</h2>
+        <img src="img/calepvang.jpg" alt=".">
+    </div>
+    <div class="info-section">
+        <h3>Distribution</h3>
+        <div id="map"></div>
+        <div class="description">
+            <p><strong>Description</strong>  </p>
+            <p><strong>Tên khoa học:</strong> Setipinna breviceps</p>
+            <p><strong>Tên Việt Nam:</strong> Cá lẹp vàng</p>
+            <p><strong>Tên tiếng Anh:</strong> </p>
+            <p><strong>Synonym:</strong> </p>
+            <p><strong>Họ:</strong> cá trỏng </p>
+            <p><strong>Bộ:</strong> cá trích </p>
+            <p><strong>Lớp:</strong> </p>
+            <p><strong>Đặc điểm nhận dạng:</strong>  </p>
+            <p><strong>Đặc điểm sinh học:</strong> </p>
+            <p><strong>Đặc điểm sinh thái:</strong> </p>
+            <p><strong>Giá trị:</strong> </p>
+            <p><strong>Thứ hạng bảo tồn:</strong> </p>
+            <p><strong>Nguồn:</strong> </p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>© Sinh vật biển Cà Mau 2024</p>
+    <p>Mọi yêu cầu, góp ý có thể liên hệ thông qua <a href="#">form liên hệ của chúng tôi</a>.</p>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([8.66306, 104.7025], 10);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+    var marker = L.marker([8.66306,  104.7025]).addTo(map);
+    marker.bindPopup("Tọa độ ghi nhận: 8.66306;  104.7025").openPopup();
+</script>
+
+</body>
+</html>
