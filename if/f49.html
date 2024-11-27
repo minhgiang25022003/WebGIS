@@ -1,4 +1,3 @@
-TYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -98,53 +97,54 @@ TYPE html>
 
 <div class="header">
     <h1>Sinh vật biển Cà Mau</h1>
-    <div class="nav-buttons">
-        <a href="webtest2.html" class="nav-button">Trang chủ</a>
-        <a href="check7.html" class="nav-button">WebGIS</a>
-    </div>
 </div>
 
 <div class="container">
     <div class="image-section">
-        <h2>Cá ngựa đen (Hippocampus kuda)</h2>
-        <img src="img/cakimtrunghoa.jpg" alt=".">
+        <h2>Cá chét <br>(Eleutheronema tetradactylum)</h2>
+        <img src="img/cachet.jpg" alt=".">
     </div>
     <div class="info-section">
         <h3>Distribution</h3>
         <div id="map"></div>
         <div class="description">
             <p><strong>Description</strong>  </p>
-            <p><strong>Tên khoa học:</strong> Hippocampus kuda </p>
-            <p><strong>Tên Việt Nam:</strong> Cá ngựa đen</p>
-            <p><strong>Tên tiếng Anh:</strong> </p>
-            <p><strong>Synonym:</strong> </p>
-            <p><strong>Họ:</strong> cá chìa vôi  </p>
-            <p><strong>Bộ:</strong> cá chìa vôi  </p>
-            <p><strong>Lớp:</strong> </p>
-            <p><strong>Đặc điểm nhận dạng:</strong>  </p>
+			<p><strong>Nguồn:</strong> Shaw, 1804</p>
+            <p><strong>Tên khoa học:</strong> Eleutheronema tetradactylum</p>
+            <p><strong>Tên Việt Nam:</strong> Cá chét</p>
+            <p><strong>Tên tiếng Anh:</strong> Indian threadfin</p>
+            <p><strong>Họ:</strong> cá Nhụ</p>
+            <p><strong>Bộ:</strong> cá vược</p>
+            <p><strong>Đặc điểm nhận dạng:</strong> Thân thuôn, hơi dẹt bên. Mõm nhọn, miệng rộng răng nhỏ. Môi trên
+không có, môi dưới rất phát triển. Mắt rất nhỏ, chiều dài đầu gấp 7
+lần đường kính mắt, mắt có màng mỡ. Vây ngực chia làm hai phần:
+phần trên gồm cá tia chia nhánh; phần dói gồm 5 tia sợi tự do, các tia
+sợi phía trên dài nhất đạt gần đến khởi điểm vây hậu môn. Vây đuôi
+chia láng sâu, các thùy nhọn kéo dài kết thúc thành dạng sợi. Vẩy nhỏ
+ráp. Thân mầu hồng đen với các dải mờ nhạt. Tất cả các vây mầu
+vàng</p>
             <p><strong>Đặc điểm sinh học:</strong> </p>
             <p><strong>Đặc điểm sinh thái:</strong> </p>
             <p><strong>Giá trị:</strong> </p>
             <p><strong>Thứ hạng bảo tồn:</strong> </p>
-            <p><strong>Nguồn:</strong> </p>
+            
         </div>
     </div>
 </div>
-
 <div class="footer">
     <p>© Sinh vật biển Cà Mau 2024</p>
-    <p>Bản quyền hình ảnh trên trang này thuộc về các nhiếp ảnh gia được ghi nhận. Mọi yêu cầu sử dụng có thể liên hệ thông qua <a href="#">form liên hệ của chúng tôi</a>.</p>
+    <p>Mọi yêu cầu, góp ý sử dụng có thể liên hệ thông qua <a href="#">form liên hệ của chúng tôi</a>.</p>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script>
-    var map = L.map('map').setView([8.69858, 104.68087], 10);
+    var map = L.map('map').setView([8.74274, 104.72809], 10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
-    var marker = L.marker([8.69858, 104.68087]).addTo(map);
-    marker.bindPopup("Tọa độ ghi nhận: 8.69858; 104.68087").openPopup();
+    var marker = L.marker([8.74274, 104.72809]).addTo(map);
+    marker.bindPopup("Tọa độ ghi nhận: 8.74274; 104.72809").openPopup();
 </script>
 
 </body>

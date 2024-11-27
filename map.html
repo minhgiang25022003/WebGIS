@@ -7,56 +7,34 @@
     <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
     <style>
     /* Đặt style cho toàn bộ trang */
-    body {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        overflow: hidden;
-        background-color: #2b2b2b;
-    }
-
-    /* Header */
-    header {
-        background-color: #222;
-        color: #00FF00;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-    }
-    header a {
-        text-decoration: none;
-        color: white;
-        margin-left: 15px;
-    }
-    header a.active {
-        background-color: #00FF00;
-        color: black;
-        padding: 5px 10px;
-        border-radius: 5px;
-    }
-
+    html, body {
+    height: 100%; /* Chiều cao toàn bộ trang */
+    margin: 0;
+    padding: 0;
+}
     /* Phần chính chứa bản đồ và sidebar */
     #content {
-        display: flex;
-        flex: 1;
-    }
+    display: flex;
+    flex: 1;
+    height: 100%; /* Đảm bảo toàn bộ chiều cao khớp với trang */
+}
+
     #sidebar {
-        width: 20%;
-        padding: 10px;
-        border-right: 1px solid #ccc;
-        height: calc(100vh - 120px);
-        overflow-y: auto;
-        background-color: #333;
-        color: white;
-    }
+    width: 20%;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+    height: 100%; /* Chiều cao toàn bộ trang */
+    overflow-y: auto;
+    background-color: #333;
+    color: white;
+}
+
     #map {
-        flex-grow: 1;
-        height: calc(100vh - 100px);
-        margin-left: 10px; /* Thêm khoảng cách bên trái để không đè lên thanh bên */
-    }
+    flex-grow: 1;
+    height: 100%; /* Sử dụng toàn bộ chiều cao */
+    margin-left: 10px; /* Khoảng cách bên trái nếu cần */
+}
+
 
     /* Popup trên bản đồ */
     .ol-popup {
@@ -70,18 +48,7 @@
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     }
 
-    /* Footer */
-    footer {
-        background-color: #222;
-        color: white;
-        text-align: center;
-        padding: 10px 0;
-        font-size: 14px;
-    }
-    footer a {
-        color: #00FF00;
-        text-decoration: none;
-    }
+    
 	category {
             cursor: pointer;
             font-weight: bold;
@@ -119,16 +86,6 @@
 </head>
 
 <body onload="initialize_map();">
-
-<!-- Phần đầu trang -->
-<header>
-    <div>Sinh vật biển Cà Mau</div>
-    <nav>
-        <a href="https://minhgiang25022003.github.io/WebGIS/">Trang chủ</a>
-        <a href="#" class="active">WebGIS</a>
-    </nav>
-</header>
-
 <!-- Phần nội dung chứa sidebar và bản đồ -->
 <div id="content">
     <!-- Sidebar bên trái -->
@@ -371,11 +328,7 @@
     <div id="popup" class="ol-popup"></div>
 </div>
 
-<!-- Phần chân trang -->
-<footer>
-    © Sinh vật biển Cà Mau 2024 <br>
-    Mọi yêu cầu, góp ý có thể liên hệ thông qua <a href="contact.html">form liên hệ của chúng tôi</a>.
-</footer>
+
 
 <script>
     var format = 'image/png';
@@ -471,7 +424,7 @@
 
         var viewMap = new ol.View({
             center: ol.proj.fromLonLat([105.1524, 9.1883]),
-            zoom: 9.4
+            zoom: 9
         });
 
         map = new ol.Map({

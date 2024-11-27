@@ -4,133 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sinh vật biển Cà Mau</title>
-   	<style>	
-        /* CSS cho thanh tìm kiếm */
-        .search-container {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .search-input {
-            width: 50%;
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-		* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #1c1c1c;
-    color: #ffffff;
-}
-
-header {
-    background-color: #333;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
-header h1 {
-    font-size: 24px;
-    color: #66ff66;
-}
-
-nav a {
-    text-decoration: none;
-    color: #fff;
-    margin-left: 20px;
-    padding: 5px 10px;
-}
-
-nav a.active {
-    background-color: #66ff66;
-    color: #1c1c1c;
-    border-radius: 4px;
-}
-
-.intro {
-    text-align: center;
-    padding: 40px 20px;
-}
-
-.intro h2 {
-    color: #66ff66;
-    margin-bottom: 20px;
-}
-
-.gallery {
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-.gallery-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.gallery-item {
-    background-color: #2c2c2c;
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
-    max-width: 400px; /* Tăng kích thước chiều rộng */
-    flex: 1 1 calc(33.33% - 20px); /* Điều chỉnh khoảng cách giữa các ô */
-    margin-bottom: 20px;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: auto; /* Để hình ảnh không bị cắt, giữ nguyên tỷ lệ */
-    object-fit: contain; /* Hiển thị toàn bộ hình ảnh */
-}
-
-
-.caption {
-    padding: 10px;
-}
-
-.caption em {
-    display: block;
-    font-size: 18px;
-    color: #66ff66;
-}
-
-.caption p {
-    font-size: 14px;
-    color: #cccccc;
-}
-
-.footer {
-    background-color: #1c1c1c;
-    padding: 20px;
-    text-align: center;
-    color: #cccccc;
-    border-top: 1px solid #333;
-}
-
-.footer p {
-    margin: 10px 0;
-}
-
-.footer a {
-    color: #66ff66;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    text-decoration: underline;
-}
-    </style>
+	<link rel="stylesheet" href="styletrangchu.css">
+   	
 </head>
 <body>
     <!-- Thanh công cụ -->
@@ -138,7 +13,7 @@ nav a.active {
         <h1>Sinh vật biển Cà Mau</h1>
         <nav>
             <a href="#" class="active">Trang chủ</a>
-            <a href="check7.html">WebGIS</a>
+            <a href="webGIS.html">WebGIS</a>
         </nav>
     </header>
 
@@ -147,6 +22,12 @@ nav a.active {
         <h2>CƠ SỞ DỮ LIỆU CÁC LOÀI SINH VẬT BIỂN TẠI CÀ MAU</h2>
         <p>Khám phá các loài sinh vật biển đa dạng ở Cà Mau thông qua bộ sưu tập hình ảnh sống động và vị trí phân bổ chủ yếu tại vùng biển Cà Mau.</p>
     </section>
+	<!-- Phần ô lớn hiển thị bản đồ -->
+<section class="map-container">
+    <h2>Phân bổ của các loài</h2>
+    <iframe src="map.html" frameborder="0" class="map-frame"></iframe>
+</section>
+
 	<!-- Thanh công cụ tìm kiếm -->
     <div class="search-container">
         <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm loài cá..." onkeyup="searchFish()">
@@ -540,6 +421,78 @@ nav a.active {
                 <div class="caption">
                     <em>Cá nạng hồng </em>
                     <p>Otolithes ruber </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f44.html" target="_blank">
+                <img src="img/camangro.jpg" alt="Sinh vật biển 44">
+                <div class="caption">
+                    <em>Cá mang rổ </em>
+                    <p>Toxotes sp </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f45.html" target="_blank">
+                <img src="img/canau.jpg" alt="Sinh vật biển 45">
+                <div class="caption">
+                    <em>Cá nâu </em>
+                    <p>Scatophagus argus</p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f46.html" target="_blank">
+                <img src="img/cadoivayto.jpg" alt="Sinh vật biển 46">
+                <div class="caption">
+                    <em>Cá đối vẩy to </em>
+                    <p>Liza macrolepis </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f47.html" target="_blank">
+                <img src="img/cadoivayco.jpg" alt="Sinh vật biển 47">
+                <div class="caption">
+                    <em>Cá đối vẩy cồ </em>
+                    <p>Liza melinoptera </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f48.html" target="_blank">
+                <img src="img/cadoilungxanh.jpg" alt="Sinh vật biển 48">
+                <div class="caption">
+                    <em>Cá đối lưng xanh</em>
+                    <p>Liza subviridis </p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f49.html" target="_blank">
+                <img src="img/cachet.jpg" alt="Sinh vật biển 49">
+                <div class="caption">
+                    <em>Cá chét</em>
+                    <p>Eleutheronema tetradactylum</p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f50.html" target="_blank">
+                <img src="img/canhu.jpg" alt="Sinh vật biển 50">
+                <div class="caption">
+                    <em>Cá nhụ</em>
+                    <p>Polynemus borneensis</p>
+                </div>
+			</a>
+            </div>
+			<div class="gallery-item">
+			<a href="if/f51.html" target="_blank">
+                <img src="img/carothia.jpg" alt="Sinh vật biển 51">
+                <div class="caption">
+                    <em>Cá rô thia</em>
+                    <p>Abudefduf bengalensis </p>
                 </div>
 			</a>
             </div>

@@ -48,8 +48,8 @@
             display: flex;
             background-color: #222;
             color: #fff;
-            padding: 20px;
-            max-width: 900px;
+            padding: 50px;
+            max-width: 1200px;
             margin: auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -65,12 +65,24 @@
             object-fit: contain;
             border-radius: 8px;
         }
+		/* Các ảnh phụ */
+        .sub-images {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+        .sub-images img {
+    width: 30%; /* Chỉnh kích thước ảnh phụ */
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
         .info-section {
             flex: 1;
             padding: 20px;
         }
         #map {
-            height: 300px;
+            height: 500px;
             width: 100%;
             border-radius: 8px;
         }
@@ -98,17 +110,35 @@
 
 <div class="header">
     <h1>Sinh vật biển Cà Mau</h1>
-    <div class="nav-buttons">
-        <a href="webtest2.html" class="nav-button">Trang chủ</a>
-        <a href="check7.html" class="nav-button">WebGIS</a>
-    </div>
 </div>
 
 <div class="container">
-    <div class="image-section">
+   <div class="image-section">
         <h2>Cá nhám chấm <br>(Atelomycterus macleayi)</h2>
-        <img src="img/canhamcham.jpg" alt="Abalistes stellatus">
+        
+        <!-- Main Image -->
+        <div class="main-image">
+            <img id="main-img" src="img/canhamcham.jpg" alt="Ảnh chính">
+            <div class="source" id="image-source">Nguồn: Whitley, 1939</div>
+        </div>
+        
+        <!-- Sub images -->
+        <div class="sub-images">
+            <img src="img/canhamcham.jpg" alt="Ảnh 1" onclick="changeImage('img/canhamcham.jpg', 'Nguồn: Whitley, 1939')">
+            <img src="img/canhamcham2.jpg" alt="Ảnh 2" onclick="changeImage('img/canhamcham2.jpg', 'Nguồn: Mark Allen')">
+            <img src="img/canhamcham3.jpg" alt="Ảnh 3" onclick="changeImage('img/canhamcham3.jpg', 'Nguồn: Kristin Anderson, 2018')">
+        </div>
     </div>
+	<script>
+    // Hàm thay đổi ảnh chính và nguồn khi người dùng bấm vào ảnh phụ
+    function changeImage(imageSrc, sourceText) {
+        // Thay đổi ảnh chính
+        document.getElementById("main-img").src = imageSrc;
+        
+        // Thay đổi nguồn
+        document.getElementById("image-source").innerHTML = sourceText;
+    }
+</script>
     <div class="info-section">
         <h3>Distribution</h3>
         <div id="map"></div>
@@ -116,17 +146,14 @@
             <p><strong>Description</strong>  </p>
             <p><strong>Tên khoa học:</strong> Atelomycterus macleayi </p>
             <p><strong>Tên Việt Nam:</strong> Cá nhám chấm  </p>
-            <p><strong>Tên tiếng Anh:</strong> </p>
-            <p><strong>Synonym:</strong> </p>
-            <p><strong>Họ:</strong> </p>
-            <p><strong>Bộ:</strong> </p>
-            <p><strong>Lớp:</strong> </p>
+            <p><strong>Tên tiếng Anh:</strong> </p>           
+            <p><strong>Họ:</strong> Cá nhám mèo</p>
+            <p><strong>Bộ:</strong> Cá mập</p>            
             <p><strong>Đặc điểm nhận dạng:</strong> </p>
             <p><strong>Đặc điểm sinh học:</strong> </p>
             <p><strong>Đặc điểm sinh thái:</strong> </p>
             <p><strong>Giá trị:</strong> </p>
             <p><strong>Thứ hạng bảo tồn:</strong> </p>
-            <p><strong>Nguồn:</strong> </p>
         </div>
     </div>
 </div>
@@ -138,15 +165,35 @@
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script>
-    var map = L.map('map').setView([8.66306, 104.7025], 10);
+    var map = L.map('map').setView([8.66306, 104.7025], 11);
+
+    // Thêm lớp tile từ OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
-    var marker = L.marker([8.66306,  104.7025]).addTo(map);
-    marker.bindPopup("Tọa độ ghi nhận: 8.66306;  104.7025").openPopup();
+
+    // Tạo biểu tượng nhỏ là một chấm đỏ
+    var redIcon = L.divIcon({
+        className: 'red-icon', // Tạo một lớp CSS tùy chỉnh
+        html: '<div style="background-color: red; border-radius: 50%; width: 10px; height: 10px;"></div>', // Chấm đỏ nhỏ
+        iconSize: [10, 10], // Kích thước biểu tượng
+        iconAnchor: [5, 5] // Neo vào giữa biểu tượng
+    });
+
+    // Tạo marker với chấm đỏ
+    var marker1 = L.marker([8.66306, 104.7025], { icon: redIcon }).addTo(map);
+    marker1.bindPopup("Tọa độ ghi nhận: 8.66306; 104.7025");
+
+    var marker2 = L.marker([8.67306, 104.7125], { icon: redIcon }).addTo(map);
+    marker2.bindPopup("Tọa độ ghi nhận: 8.67306; 104.7125");
+
+    var marker3 = L.marker([8.67306, 104.6925], { icon: redIcon }).addTo(map);
+    marker3.bindPopup("Tọa độ ghi nhận: 8.67306; 104.6925");
 </script>
+
+
+
 
 </body>
 </html>
-

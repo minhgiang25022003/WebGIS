@@ -1,4 +1,16 @@
-* {
+/* CSS cho thanh tìm kiếm */
+        .search-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .search-input {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+		* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -38,7 +50,7 @@ nav a.active {
 
 .intro {
     text-align: center;
-    padding: 40px 20px;
+    padding: 10px 10px;
 }
 
 .intro h2 {
@@ -111,4 +123,33 @@ nav a.active {
 .footer a:hover {
     text-decoration: underline;
 }
+.map-container {
+    text-align: center;
+    margin: 10px 0;
+}
 
+.map-container h2 {
+    margin-top: 10px; /* Giảm khoảng cách phía trên */
+    margin-bottom: 10px; /* Giảm khoảng cách phía dưới */
+    font-size: 24px;
+	color: yellow;
+}
+
+
+.map-frame {
+    width: 80%;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.gallery-item .caption em {
+    text-decoration: none; /* Xóa gạch chân */
+}
+
+.gallery-item .caption p {
+    text-decoration: none; /* Đảm bảo đoạn mô tả cũng không bị gạch chân */
+}
+
+.gallery-item a {
+    text-decoration: none; /* Xóa gạch chân cho liên kết */
+}
